@@ -4,7 +4,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                Lets do this!
+                lets do this
             </div>
         );
     }
