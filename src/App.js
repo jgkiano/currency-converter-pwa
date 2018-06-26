@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Layout, AppBar, Footer, ContentContainer } from './components';
 
 class App extends Component {
     render() {
         return (
-            <div>
-                lets do this
-            </div>
+            <Layout>
+                <AppBar />
+                    <ContentContainer />
+                <Footer />
+            </Layout>
         );
     }
 }
