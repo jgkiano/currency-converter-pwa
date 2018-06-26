@@ -1,4 +1,4 @@
 export * from './Layout';
 export * from './AppBar';
 export * from './Footer';
-export * from './ContentContainer'
+export * from './Modal';

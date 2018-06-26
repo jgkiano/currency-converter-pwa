@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.2.3",
+    "@material-ui/icons": "^1.1.0",
     "axios": "^0.18.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "popmotion-pose": "^2.0.6",
