@@ -4,27 +4,9 @@ import { Select, Input } from '../components';
 import { Button, LinearProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 
-const currencies = [
-    {
-      value: 'USD',
-      label: 'USD',
-    },
-    {
-      value: 'EUR',
-      label: 'EUR',
-    },
-    {
-      value: 'BTC',
-      label: 'BTC',
-    },
-    {
-      value: 'JPY',
-      label: 'JPY',
-    },
-];
-
 class Converter_ extends Component {
     render() {
+        const { loading, currencies, from, to } = this.props;
         return (
             <div>
             <ConverterContainer>
@@ -32,13 +14,15 @@ class Converter_ extends Component {
                     <Select 
                         label="From" 
                         options={currencies} 
-                        default={currencies[0].value}
+                        default={from}
+                        disabled={loading}
                     />
                     <Separator />
                     <Select 
                         label="To" 
                         options={currencies} 
-                        default={currencies[1].value}
+                        default={to}
+                        disabled={loading}
                     />
                 </SelectContainer>
                 <InputContainer>
@@ -54,8 +38,9 @@ class Converter_ extends Component {
     }
 
     _renderResult = () => {
+        const { loading } = this.props;
         return (
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" disabled={loading}>
                 Convert
             </Button>
         );
@@ -72,7 +57,8 @@ class Converter_ extends Component {
     }
 
     _renderLoader = () => {
-        return null;
+        const { loading } = this.props;
+        if (!loading) return null;
         return (
             <LinearProgress />
         );
@@ -126,7 +112,7 @@ const SelectContainer = styled.div`
 `;
 
 function mapStateToProps({ currency }) {
-    return { currency };
+    return { ...currency };
 }
 
 const Converter = connect(mapStateToProps, null)(Converter_);

@@ -11,7 +11,7 @@ class Select extends Component {
             <StyledTextField
                 label={this.props.label}
                 select
-                value={this.props.default ? this.props.default : null}
+                value={this.props.default && this.props.default ? this.props.default : ''}
                 onChange={this._handleChange}
                 SelectProps={{native: true}}
                 disabled={this.props.disabled}
@@ -21,7 +21,7 @@ class Select extends Component {
         );
     }
     _renderOptions = () => {
-        if(!this.props.options || !this.props.options.length) return null;
+        if(!this.props.options || !this.props.options.length) return <option />;
         return this.props.options.map( option => {
             return (
                 <option key={option.value} value={option.value}>

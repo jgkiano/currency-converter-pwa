@@ -1,6 +1,9 @@
 const INITIAL_STATE = {
+    loading: false,
     currencies: [],
-    exchangeRates: []
+    exchangeRates: [],
+    from: null,
+    to: null
 };
 
 export default (state = INITIAL_STATE, action) => {
