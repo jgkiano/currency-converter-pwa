@@ -58,9 +58,10 @@ class AppBar extends Component {
         return null;
     }
 
-    _handleModalClick = () => {
+    _handleModalClick = (type) => {
         this.setState({ showModal: false}, () => {
-            console.log('hmmmmm...🤔');
+            if(type === 'left') return  window.open('https://github.com/julezKiano','_blank');
+            return  window.open('mailto:jgkiano@gmail.com.com?Subject=Hey Kiano');
         });
     }
 
