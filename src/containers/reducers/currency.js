@@ -1,6 +1,7 @@
 import {
     CURRENCIES_FOUND,
-    CURRENCY_SELECTED
+    CURRENCY_SELECTED,
+    AMOUNT_CHANGED
 } from '../types';
 
 const INITIAL_STATE = {
@@ -10,7 +11,8 @@ const INITIAL_STATE = {
     from: null,
     to: null,
     exchangeAvailable: false,
-    total: 0.00
+    total: 0.00,
+    amount: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,6 +23,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, currencies: action.payload, from, to, loading: false };
         case CURRENCY_SELECTED:
             return { ...state, [action.payload.type]: action.payload.currency };
+        case AMOUNT_CHANGED:
+            return { ...state, amount: action.payload };
         default:
             return state;
     }

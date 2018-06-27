@@ -2,10 +2,11 @@ import axios from 'axios';
 import _ from 'lodash';
 import {
     CURRENCIES_FOUND,
-    CURRENCY_SELECTED
+    CURRENCY_SELECTED,
+    AMOUNT_CHANGED
 } from '../types';
 
-export const fetchCurrencies = () => async (dispatch) => {
+export const fetchCurrencies = () => async dispatch => {
     try {
         const { data } = await axios.get('https://free.currencyconverterapi.com/api/v5/currencies');
         const { results } = data;
@@ -16,3 +17,5 @@ export const fetchCurrencies = () => async (dispatch) => {
 }
 
 export const currencySelected = (currency, type) => ({ type: CURRENCY_SELECTED, payload: { currency, type  } });
+
+export const onAmountChange = payload => ({ type: AMOUNT_CHANGED, payload });

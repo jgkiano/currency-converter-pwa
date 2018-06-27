@@ -10,7 +10,7 @@ class Select extends Component {
                 label={this.props.label}
                 select
                 value={this.props.value && this.props.value ? this.props.value.id : ''}
-                onChange={this.props.onChange}
+                onChange={ event => this.props.onChange(event.target.value)}
                 SelectProps={{native: true}}
                 disabled={this.props.disabled}
             >

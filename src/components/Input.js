@@ -9,11 +9,12 @@ const StyledTextField = styled(TextField)`
 
 class Input extends Component {
     render() {
+        const { value, onChange } = this.props;
         return (
             <StyledTextField
                 label="Amount"
-                // value={9000}
-                // onChange={ number => console.log(number)}
+                value={value}
+                onChange={ event => onChange(event.target.value)}
                 type="number"
                 placeholder="0.00"
                 disabled={this.props.disabled}

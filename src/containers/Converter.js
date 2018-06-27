@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button, LinearProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { currencySelected } from './actions';
+import { currencySelected, onAmountChange } from './actions';
 import { Select, Input } from '../components';
 
 class Converter_ extends Component {
     render() {
-        const { loading, currencies, from, to } = this.props;
+        const { loading, currencies, from, to, amount, onAmountChange } = this.props;
         return (
             <div>
             <ConverterContainer>
@@ -29,7 +29,7 @@ class Converter_ extends Component {
                     />
                 </SelectContainer>
                 <InputContainer>
-                    <Input />   
+                    <Input value={amount} onChange={onAmountChange} />   
                 </InputContainer>
                 <ResultContainer>
                     {this._renderResult()}
@@ -44,7 +44,7 @@ class Converter_ extends Component {
         const { loading, exchangeAvailable, to, total } = this.props;
         if(!exchangeAvailable) {
             return (
-                <Button variant="contained" color="primary" disabled={loading}>
+                <Button variant="contained" color="primary" disabled={loading} onClick={this._handleConversion}>
                     Convert
                 </Button>
             );
@@ -70,11 +70,19 @@ class Converter_ extends Component {
         );
     }
 
-    _handleOnSelectChange = (event, type) => {
-        let selected = event.target.value;
+    _handleOnSelectChange = (value, type) => {
+        let selected = value;
         const { currencies, currencySelected } = this.props;
         selected = currencies.filter( currency => currency.id === selected )[0];
         currencySelected(selected, type);
+    }
+
+    _handleConversion = () => {
+        const { to, from, amount } = this.props;
+    }
+
+    _handleAmountChange = (amount) => {
+        console.log(amount);
     }
 
 }
@@ -122,6 +130,6 @@ function mapStateToProps({ currency }) {
     return { ...currency };
 }
 
-const actions = { currencySelected };
+const actions = { currencySelected, onAmountChange };
 const Converter = connect(mapStateToProps, actions)(Converter_);
 export { Converter };
