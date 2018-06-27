@@ -32,18 +32,16 @@ class Converter extends Component {
                         label="From" 
                         options={currencies} 
                         default={currencies[0].value}
-                        disabled
                     />
                     <Separator />
                     <Select 
                         label="To" 
                         options={currencies} 
                         default={currencies[1].value}
-                        disabled
                     />
                 </SelectContainer>
                 <InputContainer>
-                    <Input disabled />   
+                    <Input />   
                 </InputContainer>
                 <ResultContainer>
                     {this._renderResult()}
@@ -73,6 +71,7 @@ class Converter extends Component {
     }
 
     _renderLoader = () => {
+        return null;
         return (
             <LinearProgress />
         );
@@ -101,6 +100,7 @@ const ConverterContainer = styled.div`
     padding: 15px;
     background-color: white;
     padding-top: 30px;
+    border-bottom: 1px solid #E0E0E0;
 `;
 
 const InputContainer = styled.div`
