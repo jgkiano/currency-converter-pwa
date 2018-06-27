@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Select, Input } from '../components';
 import { Button, LinearProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 const currencies = [
     {
@@ -22,7 +23,7 @@ const currencies = [
     },
 ];
 
-class Converter extends Component {
+class Converter_ extends Component {
     render() {
         return (
             <div>
@@ -124,4 +125,9 @@ const SelectContainer = styled.div`
     flex-direction: row;
 `;
 
+function mapStateToProps({ currency }) {
+    return { currency };
+}
+
+const Converter = connect(mapStateToProps, null)(Converter_);
 export { Converter };
