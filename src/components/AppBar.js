@@ -24,7 +24,7 @@ class AppBar extends Component {
 
     render() {
         return (
-            <Bar>
+            <Bar position="static">
                 {this._renderModal()}
                 <Toolbar>
                     <TitleContainer>
