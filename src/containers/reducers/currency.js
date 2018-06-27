@@ -1,5 +1,6 @@
 import {
-    CURRENCIES_FOUND
+    CURRENCIES_FOUND,
+    CURRENCY_SELECTED
 } from '../types';
 
 const INITIAL_STATE = {
@@ -17,6 +18,8 @@ export default (state = INITIAL_STATE, action) => {
             const from = action.payload.filter( curr => curr.id === "USD" )[0];
             const to = action.payload.filter( curr => curr.id === "KES" )[0];
             return { ...state, currencies: action.payload, from, to, loading: false };
+        case CURRENCY_SELECTED:
+            return { ...state, [action.payload.type]: action.payload.currency };
         default:
             return state;
     }

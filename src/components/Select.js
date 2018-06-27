@@ -5,13 +5,12 @@ import { TextField } from '@material-ui/core';
 class Select extends Component {
 
     render() {
-        console.log(this.props.default);
         return (
             <StyledTextField
                 label={this.props.label}
                 select
-                value={this.props.default && this.props.default ? this.props.default.id : ''}
-                onChange={this._handleChange}
+                value={this.props.value && this.props.value ? this.props.value.id : ''}
+                onChange={this.props.onChange}
                 SelectProps={{native: true}}
                 disabled={this.props.disabled}
             >
@@ -19,6 +18,7 @@ class Select extends Component {
             </StyledTextField>
         );
     }
+
     _renderOptions = () => {
         if(!this.props.options || !this.props.options.length) return <option />;
         return this.props.options.map( option => {
@@ -28,9 +28,6 @@ class Select extends Component {
                 </option>
             );
         });
-    }
-    _handleChange = (event) => {
-        console.log(event.target.value);
     }
 }
 

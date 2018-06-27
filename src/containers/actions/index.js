@@ -1,7 +1,8 @@
 import axios from 'axios';
 import _ from 'lodash';
 import {
-    CURRENCIES_FOUND
+    CURRENCIES_FOUND,
+    CURRENCY_SELECTED
 } from '../types';
 
 export const fetchCurrencies = () => async (dispatch) => {
@@ -13,3 +14,5 @@ export const fetchCurrencies = () => async (dispatch) => {
         console.log(error)
     }
 }
+
+export const currencySelected = (currency, type) => ({ type: CURRENCY_SELECTED, payload: { currency, type  } });
