@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
 
 class Select extends Component {
-    state = {
-      currency: 'EUR'
-    }
+
     render() {
+        console.log(this.props.default);
         return (
             <StyledTextField
                 label={this.props.label}
                 select
-                value={this.props.default && this.props.default ? this.props.default : ''}
+                value={this.props.default && this.props.default ? this.props.default.id : ''}
                 onChange={this._handleChange}
                 SelectProps={{native: true}}
                 disabled={this.props.disabled}
@@ -24,8 +23,8 @@ class Select extends Component {
         if(!this.props.options || !this.props.options.length) return <option />;
         return this.props.options.map( option => {
             return (
-                <option key={option.value} value={option.value}>
-                    {option.label}
+                <option key={option.id} value={option.id}>
+                    {`${option.currencyName} (${option.currencySymbol})`}
                 </option>
             );
         });

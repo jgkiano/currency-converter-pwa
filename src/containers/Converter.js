@@ -38,22 +38,24 @@ class Converter_ extends Component {
     }
 
     _renderResult = () => {
-        const { loading } = this.props;
+        const { loading, exchangeAvailable } = this.props;
+        if(!exchangeAvailable) {
+            return (
+                <Button variant="contained" color="primary" disabled={loading}>
+                    Convert
+                </Button>
+            );
+        }
         return (
-            <Button variant="contained" color="primary" disabled={loading}>
-                Convert
-            </Button>
+            <div>
+                <NumberText>
+                    7566.00
+                </NumberText>
+                <CurrencyText>
+                    KES
+                </CurrencyText>
+            </div>
         );
-        // return (
-        //     <div>
-        //         <NumberText>
-        //             7566.00
-        //         </NumberText>
-        //         <CurrencyText>
-        //             KES
-        //         </CurrencyText>
-        //     </div>
-        // );
     }
 
     _renderLoader = () => {
@@ -98,12 +100,6 @@ const InputContainer = styled.div`
 
 const Separator = styled.div`
     width: 10px;
-`;
-
-const Container = styled.div`
-    width: 100%;
-    flex: 1;
-    overflow: scroll;
 `;
 
 const SelectContainer = styled.div`
