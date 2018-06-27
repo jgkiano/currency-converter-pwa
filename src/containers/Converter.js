@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button, LinearProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { currencySelected, onAmountChange } from './actions';
+import { currencySelected, onAmountChange, xChange } from './actions';
 import { Select, Input } from '../components';
 
 class Converter_ extends Component {
@@ -17,7 +17,7 @@ class Converter_ extends Component {
                         options={currencies} 
                         value={from}
                         disabled={loading}
-                        onChange={ event => this._handleOnSelectChange(event, 'from')}
+                        onChange={ value => this._handleOnSelectChange(value, 'from')}
                     />
                     <Separator />
                     <Select 
@@ -25,7 +25,7 @@ class Converter_ extends Component {
                         options={currencies} 
                         value={to}
                         disabled={loading}
-                        onChange={ event => this._handleOnSelectChange(event, 'to')}
+                        onChange={ value => this._handleOnSelectChange(value, 'to')}
                     />
                 </SelectContainer>
                 <InputContainer>
@@ -78,11 +78,8 @@ class Converter_ extends Component {
     }
 
     _handleConversion = () => {
-        const { to, from, amount } = this.props;
-    }
-
-    _handleAmountChange = (amount) => {
-        console.log(amount);
+        const { to, from, amount, xChange } = this.props;
+        xChange({ to, from, amount });
     }
 
 }
@@ -130,6 +127,6 @@ function mapStateToProps({ currency }) {
     return { ...currency };
 }
 
-const actions = { currencySelected, onAmountChange };
+const actions = { currencySelected, onAmountChange, xChange };
 const Converter = connect(mapStateToProps, actions)(Converter_);
 export { Converter };
