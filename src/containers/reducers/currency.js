@@ -9,7 +9,8 @@ const INITIAL_STATE = {
     exchangeRates: [],
     from: null,
     to: null,
-    exchangeAvailable: false
+    exchangeAvailable: false,
+    total: 0.00
 };
 
 export default (state = INITIAL_STATE, action) => {

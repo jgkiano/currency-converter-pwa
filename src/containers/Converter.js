@@ -41,7 +41,7 @@ class Converter_ extends Component {
     }
 
     _renderResult = () => {
-        const { loading, exchangeAvailable } = this.props;
+        const { loading, exchangeAvailable, to, total } = this.props;
         if(!exchangeAvailable) {
             return (
                 <Button variant="contained" color="primary" disabled={loading}>
@@ -49,13 +49,14 @@ class Converter_ extends Component {
                 </Button>
             );
         }
+        let surfix = to && to.id ? to.id : '';
         return (
             <div>
                 <NumberText>
-                    7566.00
+                    {total}
                 </NumberText>
                 <CurrencyText>
-                    KES
+                    {surfix}
                 </CurrencyText>
             </div>
         );
