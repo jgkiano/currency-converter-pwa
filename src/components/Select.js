@@ -22,9 +22,10 @@ class Select extends Component {
     _renderOptions = () => {
         if(!this.props.options || !this.props.options.length) return <option />;
         return this.props.options.map( option => {
+            const symbol = option.currencySymbol ? `(${option.currencySymbol})` : '';
             return (
                 <option key={option.id} value={option.id}>
-                    {`${option.currencyName} (${option.currencySymbol})`}
+                    {`${option.currencyName} ${symbol}`}
                 </option>
             );
         });
