@@ -4,7 +4,9 @@ import {
     AMOUNT_CHANGED,
     XCHANGE_FOUND,
     LOADING_START,
-    LOADING_END
+    LOADING_END,
+    OPEN_SNACK,
+    CLOSE_SNACK
 } from '../types';
 
 const INITIAL_STATE = {
@@ -15,7 +17,8 @@ const INITIAL_STATE = {
     to: null,
     exchangeAvailable: false,
     total: 0.00,
-    amount: 0
+    amount: 0,
+    snack: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -58,6 +61,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true };
         case LOADING_END:
             return { ...state, loading: false };
+        case CLOSE_SNACK:
+            return { ...state, snack: null };
+        case OPEN_SNACK:
+            return { ...state, snack: action.payload, loading: false };
         default:
             return state;
     }

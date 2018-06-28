@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Converter } from './';
-import { fetchCurrencies } from './actions';
+import { fetchCurrencies, closeSnack } from './actions';
+import { Snack } from '../components';
 
 class ContentContainer_ extends Component {
 
@@ -12,8 +13,10 @@ class ContentContainer_ extends Component {
     }
 
     render() {
+        const { snack, closeSnack } = this.props;
         return (
             <Container>
+                <Snack show={snack} message={snack} onCloseRequest={closeSnack} />
                 <Converter />
             </Container>
         );
@@ -30,6 +33,6 @@ function mapStateToProps({ currency }) {
     return { ...currency };
 }
 
-const actions = { fetchCurrencies };
+const actions = { fetchCurrencies, closeSnack };
 const ContentContainer = connect(mapStateToProps, actions)(ContentContainer_);
 export { ContentContainer };

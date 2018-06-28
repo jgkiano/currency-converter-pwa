@@ -6,19 +6,22 @@ import {
     CURRENCY_SELECTED,
     AMOUNT_CHANGED,
     XCHANGE_FOUND,
-    LOADING_START
+    LOADING_START,
+    CLOSE_SNACK,
+    OPEN_SNACK
 } from '../types';
 
 export const fetchCurrencies = () => async dispatch => {
     try {
-        const { data } = await axios.get('https://free.currencyconverterapi.com/api/v5/currencies');
+        const { data } = await axios.get('https://freecurrencyconverterapi.com/api/v5/currencies');
         const { results } = data;
         dispatch({ type: CURRENCIES_FOUND, payload: _.values(results) });
         _storeInDB(_.values(results));
     } catch (error) {
         const res = await _fetchFromDB();
         if(res && res.length) return dispatch({ type: CURRENCIES_FOUND, payload: res });
-        console.log(error)
+        console.log(error);
+        return dispatch({ type: OPEN_SNACK, payload: 'Could not connect to the internet. Please check your connection.' });
     }
 }
 
@@ -40,9 +43,12 @@ export const xChange = ({ to, from, amount }) => async dispatch => {
         const query = `${from.id}_${to.id}`;
         const res = await _fetchXchangeFromDB(query);
         if(res) return dispatch({ type: XCHANGE_FOUND, payload: res });
-        console.log(error)
+        console.log(error);
+        return dispatch({ type: OPEN_SNACK, payload: 'Could not connect to the internet. Please check your connection.' });
     }
 }
+
+export const closeSnack = () => ({ type: CLOSE_SNACK });
 
 const _storeInDB = async (currencies) => {
     for ( const currency of  currencies ) {
@@ -56,8 +62,8 @@ const _fetchFromDB = async () => (await db.currencies.toArray());
 
 const _storeXchange = async xchange => {
     const { query } = xchange;
-    const storedRate = await db.exchangeRates.where({ query }).toArray();
-    if ( !storedRate.length ) {
+    let storedRate = await db.exchangeRates.where({ query });
+    if ( (await storedRate.count()) === 0 ) {
         await db.exchangeRates.add({ ...xchange });
     } else {
         storedRate.modify({ ...xchange });
