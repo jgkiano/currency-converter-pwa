@@ -6,6 +6,7 @@
     "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
     "axios": "^0.18.0",
+    "dexie": "^2.0.4",
     "lodash": "^4.17.10",
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.4.1",
