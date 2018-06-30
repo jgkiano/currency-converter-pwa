@@ -60,7 +60,7 @@ class AppBar extends Component {
 
     _handleModalClick = (type) => {
         this.setState({ showModal: false}, () => {
-            if(type === 'left') return  window.open('https://github.com/julezKiano','_blank');
+            if(type === 'left') return  window.open('https://github.com/julezKiano/currency-converter-pwa','_blank');
             return  window.open('mailto:jgkiano@gmail.com.com?Subject=Hey Kiano');
         });
     }
